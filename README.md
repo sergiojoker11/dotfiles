@@ -10,26 +10,37 @@ Personal configuration and plugins for Claude Code.
 
 ## Installation
 
-### On this machine (local path)
+### On a new machine
 
-```
-/plugin install /Users/sj11/Documents/gitrepos/sj11/dotfiles
-```
+1. Clone this repo to `~/Documents/gitrepos/sj11/dotfiles`
 
-### On a new machine (once a remote is configured)
+2. Create `~/.claude/CLAUDE.md` with a single line (loads personal preferences):
+   ```
+   @~/Documents/gitrepos/sj11/dotfiles/claude/CLAUDE.md
+   ```
 
-```
-/plugin marketplace add <git-remote-url>
-/plugin install git@sj11
-```
+3. Add the marketplace and enable plugins in `~/.claude/settings.json`:
+   ```json
+   "extraKnownMarketplaces": {
+     "sj11": {
+       "source": { "source": "git", "url": "git@github.com:sergiojoker11/dotfiles.git" },
+       "autoUpdate": true
+     }
+   },
+   "enabledPlugins": {
+     "git@sj11": true
+   }
+   ```
 
-## Claude preferences setup
+> **Note:** Claude Code has no "enable all plugins from marketplace" feature — each plugin must be listed explicitly in `enabledPlugins`. When adding a new plugin to this repo, remember to also add `"plugin-name@sj11": true` to `~/.claude/settings.json`. This is a current limitation of the platform.
 
-On a new machine, create `~/.claude/CLAUDE.md` with a single line:
+## Adding a new plugin
 
-```
-@~/Documents/gitrepos/sj11/dotfiles/claude/CLAUDE.md
-```
+1. Create `plugins/<tool-name>/` following the existing `git` plugin structure
+2. Add the plugin to `.claude-plugin/marketplace.json`
+3. Push to GitHub
+4. Add `"<tool-name>@sj11": true` to `~/.claude/settings.json`
+5. Restart Claude Code
 
 ## Structure
 
@@ -37,7 +48,9 @@ On a new machine, create `~/.claude/CLAUDE.md` with a single line:
 .claude-plugin/marketplace.json   ← marketplace catalog
 plugins/
   git/                            ← git shortcuts and automations
+    .claude-plugin/plugin.json
     skills/gitsquash/SKILL.md
+    README.md
 claude/
   CLAUDE.md                       ← preferences entry point
   preferences.md                  ← personal coding style
