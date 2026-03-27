@@ -1,6 +1,4 @@
-# Personal coding preferences
-
-## Style
+# Code style
 
 - Prefer deterministic, functional, and immutable code.
 - Avoid mutation; prefer returning new values over modifying existing ones.
