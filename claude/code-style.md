@@ -10,3 +10,7 @@
 ## Conflicts and trade-offs
 
 When a proposed change conflicts with existing code or introduces a naming collision, flag it explicitly and present the options — do not silently pick one side.
+
+## Languages
+
+- TypeScript: @typescript-style.md
