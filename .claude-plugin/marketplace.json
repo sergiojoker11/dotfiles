@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "sj11",
+  "description": "Personal Claude Code plugins — grouped by tool",
+  "version": "1.0.0",
+  "owner": { "name": "sj11" },
+  "plugins": [
+    {
+      "name": "git",
+      "description": "Git workflow shortcuts and automations",
+      "source": "./plugins/git",
+      "category": "development",
+      "version": "1.0.0",
+      "author": { "name": "sj11" }
+    }
+  ]
+}
