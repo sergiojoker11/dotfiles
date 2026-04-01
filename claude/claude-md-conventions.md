@@ -1,7 +1,7 @@
 # CLAUDE.md conventions
 
 - Never paste content inline into CLAUDE.md. Create a separate file and reference it with `@filename.md`.
-- Never modify `~/.claude/CLAUDE.md` — it only references dotfiles and must stay as-is.
+- Never modify `~/.claude/CLAUDE.md` — it only references dotfiles and must stay as-is. The goal is that everything lives in version control (this repo), so nothing is lost if the workstation is wiped or replaced. `~/.claude/CLAUDE.md` itself is the only file that lives outside the repo — it is a single-line pointer written automatically by the Ansible playbook (`roles/claude`) on every new machine, and should never be edited by hand.
 - For any personal preference or behavioral feedback worth persisting: write it to the appropriate file in dotfiles (create a new categorized file if none fits), then remind the user to commit and push.
 
 ## External link failure protocol
@@ -23,4 +23,4 @@ When the user states something categorical (a rule, preference, or constraint) t
 
 **dotfiles > repo CLAUDE.md > project memory**
 
-Only leave in project memory what is truly project-specific.
+Only leave in project memory what is truly project-specific. Even if so perhaps it is worth persisting in AGENTS|CLAUDE.md. Project memory only for personal preferences repo/project scoped.
