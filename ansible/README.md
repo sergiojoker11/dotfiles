@@ -7,7 +7,7 @@ Idempotent playbook for setting up a new macOS workstation.
 1. Install Homebrew: https://brew.sh
 2. Install Ansible and the required collection:
    ```bash
-   pip3 install ansible
+   brew install ansible
    ansible-galaxy collection install -r requirements.yml
    ```
 

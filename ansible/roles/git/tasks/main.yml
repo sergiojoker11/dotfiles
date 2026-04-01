@@ -34,7 +34,7 @@
 
 - name: Ensure ~/.gitconfig-personal exists
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.gitconfig-personal"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.gitconfig-personal"
     content: |
       [user]
           email = {{ git_personal_email }}

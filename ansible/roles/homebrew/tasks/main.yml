@@ -18,6 +18,7 @@
       # shell & terminal
       - oh-my-posh
       - zsh-completions
+      - ansible
       # databases
       - mysql-client
       # security

@@ -1,12 +1,12 @@
 - name: Ensure ~/.claude directory exists
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.claude"
+    path: "{{ ansible_facts['env']['HOME'] }}/.claude"
     state: directory
     mode: "0755"
 
 - name: Write ~/.claude/CLAUDE.md pointing to this repo
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.claude/CLAUDE.md"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.claude/CLAUDE.md"
     content: "@{{ dotfiles_dir }}/claude/CLAUDE.md\n"
     force: false
     mode: "0644"
