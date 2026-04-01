@@ -2,21 +2,29 @@
 
 Personal configuration and plugins for Claude Code.
 
+## Machine provisioning
+
+The [`ansible/`](./ansible/) directory contains an idempotent Ansible playbook that sets up a new macOS workstation: Homebrew packages, git config, zsh functions, and Claude Code MCP servers.
+
+See **[ansible/README.md](./ansible/README.md)** for setup instructions.
+
 ## Plugins
 
 | Plugin | Description |
 |---|---|
 | [git](./plugins/git) | Git workflow shortcuts and automations |
 
-## Installation
+## Claude Code setup
 
 ### On a new machine
 
-1. Clone this repo to `~/Documents/gitrepos/sj11/dotfiles`
+1. Clone this repo anywhere (the Ansible playbook handles the rest of the paths automatically).
 
-2. Create `~/.claude/CLAUDE.md` with a single line (loads personal preferences):
-   ```
-   @~/Documents/gitrepos/sj11/dotfiles/claude/CLAUDE.md
+2. Run the provisioning playbook — it will write `~/.claude/CLAUDE.md` pointing to this repo:
+   ```bash
+   cd ansible
+   ansible-galaxy collection install -r requirements.yml
+   ansible-playbook -i inventory.ini playbook.yml
    ```
 
 3. Add the marketplace and enable plugins in `~/.claude/settings.json`:
@@ -45,13 +53,21 @@ Personal configuration and plugins for Claude Code.
 ## Structure
 
 ```
+ansible/                          ← machine provisioning
+  playbook.yml
+  group_vars/all.yml              ← variables to customise per machine
+  roles/{homebrew,git,zsh,ssh,gh,gnupg,claude}/
+  git/ignore                      ← global gitignore
+  zsh/rc.zsh                      ← shell init (PATH, fnm, oh-my-posh)
+  zsh/functions.zsh               ← custom shell functions (ctx, ...)
+  ssh/config                      ← SSH host config for github/gitlab
+  gh/config.yml                   ← gh CLI preferences (no tokens)
+  gnupg/common.conf               ← GPG config
 .claude-plugin/marketplace.json   ← marketplace catalog
 plugins/
   git/                            ← git shortcuts and automations
-    .claude-plugin/plugin.json
-    skills/gitsquash/SKILL.md
-    README.md
 claude/
   CLAUDE.md                       ← preferences entry point
-  preferences.md                  ← personal coding style
+  code-style.md
+  typescript-style.md
 ```

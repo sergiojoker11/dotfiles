@@ -1,0 +1,50 @@
+- name: Install brew formulae
+  community.general.homebrew:
+    name:
+      # git & auth
+      - git
+      - gnupg
+      - pinentry-mac
+      # cloud / AWS
+      - awscli
+      - aws-sam-cli
+      - aws-vault
+      - cfn-lint
+      - rain
+      # node
+      - fnm
+      - yarn
+      - nx
+      # shell & terminal
+      - oh-my-posh
+      - zsh-completions
+      # databases
+      - mysql-client
+      # security
+      - granted
+      # dev tools
+      - glab
+      - gh
+    state: present
+    update_homebrew: false
+
+- name: Install brew casks
+  community.general.homebrew_cask:
+    name:
+      # terminal
+      - ghostty
+      # editors & IDEs
+      - visual-studio-code
+      - insomnia
+      - meld
+      # productivity
+      - alt-tab
+      - tiles
+      - shottr
+      - obsidian
+      - macwhisper
+      - spotify
+      # fonts (required by oh-my-posh themes)
+      - font-caskaydia-cove-nerd-font
+      - font-jetbrains-mono-nerd-font
+    state: present

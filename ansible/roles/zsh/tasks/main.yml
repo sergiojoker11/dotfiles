@@ -1,0 +1,7 @@
+- name: Source dotfiles rc from ~/.zshrc
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    regexp: "source .*/zsh/(rc|functions)\\.zsh"
+    line: "source {{ playbook_dir }}/zsh/rc.zsh"
+    create: true
+    mode: "0644"

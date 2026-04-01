@@ -1,0 +1,46 @@
+- name: Ensure ~/.claude directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.claude"
+    state: directory
+    mode: "0755"
+
+- name: Write ~/.claude/CLAUDE.md pointing to this repo
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.claude/CLAUDE.md"
+    content: "@{{ dotfiles_dir }}/claude/CLAUDE.md\n"
+    force: false
+    mode: "0644"
+
+- name: Get list of configured MCP servers
+  ansible.builtin.command: claude mcp list
+  register: mcp_list
+  changed_when: false
+  failed_when: false
+
+- name: Add GitLab MCP server
+  ansible.builtin.command: >
+    claude mcp add --transport http GitLab https://gitlab.com/aircall/api/v4/mcp
+  when: "'GitLab' not in mcp_list.stdout"
+  changed_when: true
+
+- name: Add Atlassian MCP server
+  ansible.builtin.command: >
+    claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp
+  when: "'atlassian' not in mcp_list.stdout"
+  changed_when: true
+
+- name: Add Datadog MCP server
+  ansible.builtin.command: >
+    claude mcp add --transport http datadog-mcp https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
+  when: "'datadog-mcp' not in mcp_list.stdout"
+  changed_when: true
+
+- name: Remind about MCP OAuth
+  ansible.builtin.debug:
+    msg: >
+      MCP servers added. Run /mcp in Claude Code and complete OAuth
+      in the browser for: GitLab, atlassian, datadog-mcp
+  when: >
+    'GitLab' not in mcp_list.stdout or
+    'atlassian' not in mcp_list.stdout or
+    'datadog-mcp' not in mcp_list.stdout

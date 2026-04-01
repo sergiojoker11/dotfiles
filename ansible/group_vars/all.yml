@@ -1,0 +1,16 @@
+# ── Identity ────────────────────────────────────────────────────────────────
+# Update these on every new machine.
+git_user_name: "Sergio Martín Sánchez"
+git_user_email: "sergio.martinsanchez@aircall.io"
+git_personal_email: "sergio.martinsanchez@gmail.com"
+
+# GPG key ID used for commit signing (gpg --list-secret-keys --keyid-format LONG)
+git_signing_key: "9406F486C19216C3"
+
+# ── Paths ────────────────────────────────────────────────────────────────────
+# Auto-derived from where the playbook lives — no need to change this.
+dotfiles_dir: "{{ playbook_dir | dirname }}"
+
+# Directory whose git repos should use the personal identity above.
+# Change this if your personal repos live elsewhere on this machine.
+git_personal_repos_dir: "~/Documents/gitrepos/sj11/"

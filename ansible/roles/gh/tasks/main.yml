@@ -1,0 +1,12 @@
+- name: Ensure ~/.config/gh directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/gh"
+    state: directory
+    mode: "0755"
+
+- name: Copy gh config (without auth tokens)
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/gh/config.yml"
+    dest: "{{ ansible_env.HOME }}/.config/gh/config.yml"
+    mode: "0600"
+    force: false

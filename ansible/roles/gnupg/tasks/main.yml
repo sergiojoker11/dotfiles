@@ -1,0 +1,15 @@
+- name: Ensure ~/.gnupg directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.gnupg"
+    state: directory
+    mode: "0700"
+
+- name: Copy GPG common config
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/gnupg/common.conf"
+    dest: "{{ ansible_env.HOME }}/.gnupg/common.conf"
+    mode: "0600"
+
+- name: Remind about GPG key import
+  ansible.builtin.debug:
+    msg: "Remember to import your GPG key: gpg --import <your-key.asc>"

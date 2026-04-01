@@ -1,0 +1,42 @@
+- name: Configure git core settings
+  community.general.git_config:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    scope: global
+  loop:
+    - { name: core.editor,          value: nano }
+    - { name: core.excludesfile,    value: "{{ playbook_dir }}/git/ignore" }
+    - { name: pager.log,            value: "less -R" }
+    - { name: pager.branch,         value: "false" }
+    - { name: push.autoSetupRemote, value: "true" }
+    - { name: rerere.enabled,       value: "true" }
+    - { name: user.name,            value: "{{ git_user_name }}" }
+    - { name: user.email,           value: "{{ git_user_email }}" }
+    - { name: user.signingkey,      value: "{{ git_signing_key }}" }
+    - { name: commit.gpgsign,       value: "true" }
+
+- name: Configure git aliases
+  community.general.git_config:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    scope: global
+  loop:
+    - name: alias.pushf
+      value: push --force-with-lease
+    - name: alias.lg
+      value: "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+- name: Configure includeIf for personal repos
+  community.general.git_config:
+    name: "includeIf.gitdir:{{ git_personal_repos_dir }}.path"
+    value: ~/.gitconfig-personal
+    scope: global
+
+- name: Ensure ~/.gitconfig-personal exists
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.gitconfig-personal"
+    content: |
+      [user]
+          email = {{ git_personal_email }}
+    force: false
+    mode: "0644"

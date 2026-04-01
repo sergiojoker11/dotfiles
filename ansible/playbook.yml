@@ -1,0 +1,25 @@
+---
+- name: Provision macOS workstation
+  hosts: local
+  gather_facts: true
+
+  roles:
+    - homebrew
+    - git
+    - zsh
+    - ssh
+    - gh
+    - gnupg
+    - claude
+
+  post_tasks:
+    - name: Manual steps reminder
+      ansible.builtin.debug:
+        msg:
+          - "Remaining manual steps:"
+          - "1. Generate or copy SSH key to ~/.ssh/id_ed25519, then add to GitHub/GitLab"
+          - "2. Import GPG key: gpg --import <your-key.asc>"
+          - "3. glab auth login --hostname gitlab.com  (select SSH + auth via Web)"
+          - "4. gh auth login"
+          - "5. In Claude Code: /mcp → select each server → OAuth in browser"
+          - "6. Add Aircall Claude plugins to ~/.claude/settings.json"
