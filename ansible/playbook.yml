@@ -22,4 +22,3 @@
           - "3. glab auth login --hostname gitlab.com  (select SSH + auth via Web)"
           - "4. gh auth login"
           - "5. In Claude Code: /mcp → select each server → OAuth in browser"
-          - "6. Add Aircall Claude plugins to ~/.claude/settings.json"

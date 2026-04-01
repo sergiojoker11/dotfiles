@@ -1,0 +1,27 @@
+{
+  "extraKnownMarketplaces": {
+    "aircall": {
+      "source": {
+        "source": "git",
+        "url": "git@gitlab.com:aircall/shared/claude-plugins.git"
+      },
+      "autoUpdate": true
+    },
+    "sj11": {
+      "source": {
+        "source": "git",
+        "url": "git@github.com:sergiojoker11/dotfiles.git"
+      },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "prompt-insights@aircall": true,
+    "pr-review-presentation@aircall": true,
+    "gitlab-automation@aircall": true,
+    "code-rabbit@aircall": true,
+    "aircall-skills@aircall": true,
+    "slack@claude-plugins-official": true,
+    "git@sj11": true
+  }
+}

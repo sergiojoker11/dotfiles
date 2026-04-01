@@ -11,6 +11,29 @@
     force: false
     mode: "0644"
 
+- name: Ensure ~/.claude/settings.json exists
+  ansible.builtin.copy:
+    dest: "{{ ansible_facts['env']['HOME'] }}/.claude/settings.json"
+    content: "{}\n"
+    force: false
+    mode: "0644"
+
+- name: Merge Claude Code settings
+  vars:
+    settings: "{{ ansible_facts['env']['HOME'] }}/.claude/settings.json"
+    fragment: "{{ playbook_dir }}/claude/settings-fragment.json"
+  ansible.builtin.shell: |
+    merged=$(jq -s '.[0] * .[1]' "{{ settings }}" "{{ fragment }}")
+    current=$(jq '.' "{{ settings }}")
+    if [ "$merged" = "$current" ]; then
+      echo "unchanged"
+    else
+      echo "$merged" > "{{ settings }}"
+      echo "changed"
+    fi
+  register: claude_settings_result
+  changed_when: "'changed' in claude_settings_result.stdout"
+
 - name: Get list of configured MCP servers
   ansible.builtin.command: claude mcp list
   register: mcp_list

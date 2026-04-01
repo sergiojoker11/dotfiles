@@ -19,6 +19,7 @@
       - oh-my-posh
       - zsh-completions
       - ansible
+      - jq
       # databases
       - mysql-client
       # security
