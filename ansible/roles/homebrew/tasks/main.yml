@@ -30,6 +30,20 @@
     state: present
     update_homebrew: false
 
+- name: Get Homebrew prefix
+  ansible.builtin.command: brew --prefix
+  register: brew_prefix
+  changed_when: false
+
+- name: Fix zsh completion directory permissions
+  ansible.builtin.file:
+    path: "{{ item }}"
+    mode: "go-w"
+  loop:
+    - "{{ brew_prefix.stdout }}/share/zsh"
+    - "{{ brew_prefix.stdout }}/share/zsh/site-functions"
+  failed_when: false
+
 - name: Install brew casks
   community.general.homebrew_cask:
     name:
