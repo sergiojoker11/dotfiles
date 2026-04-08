@@ -1,3 +1,4 @@
 @code-style.md
 @claude-md-conventions.md
 @workflow.md
+@git.md
