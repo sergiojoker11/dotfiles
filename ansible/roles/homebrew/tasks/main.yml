@@ -11,6 +11,9 @@
       - aws-vault
       - cfn-lint
       - rain
+      # kubernetes
+      - kubectl
+      - k9s
       # node
       - fnm
       - yarn
@@ -18,6 +21,7 @@
       # shell & terminal
       - oh-my-posh
       - zsh-completions
+      - fzf
       - ansible
       - jq
       # databases
