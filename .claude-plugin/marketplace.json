@@ -12,6 +12,14 @@
       "category": "development",
       "version": "1.0.0",
       "author": { "name": "sj11" }
+    },
+    {
+      "name": "lens",
+      "description": "Visual exploration tools — diagrams, charts, and architecture visualization",
+      "source": "./plugins/lens",
+      "category": "development",
+      "version": "1.0.0",
+      "author": { "name": "sj11" }
     }
   ]
 }

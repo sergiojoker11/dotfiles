@@ -1,6 +1,6 @@
-# diagram plugin
+# lens plugin
 
-Generate Mermaid diagrams and open them online.
+Visual exploration tools — diagrams, charts, and architecture visualization.
 
 ## Skills
 
