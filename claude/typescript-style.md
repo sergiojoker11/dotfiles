@@ -31,6 +31,20 @@ const Direction = { Up: 'Up', Down: 'Down' } as const
 type Direction = typeof Direction[keyof typeof Direction]
 ```
 
+### No non-null assertions
+
+Do not use the `!` non-null assertion operator to bypass TypeScript's type system:
+
+```ts
+// ✗ — lies to the compiler; can cause runtime errors
+return this.mapRecord(Attributes!)
+
+// ✓ — handle the absent case explicitly
+return Attributes ? this.mapRecord(Attributes) : { ended: false }
+```
+
+`!value` (boolean negation) is fine. `SomeType!` (type assertion) is not.
+
 ### Error handling without throw
 
 Do not `throw` in domain logic. Return an explicit result type:
@@ -40,6 +54,21 @@ type Result<T, E> = { ok: true; value: T } | { ok: false; error: E }
 ```
 
 `try/catch` belongs only at the edges (handlers, adapters, use cases).
+
+### No null or undefined for typed failures
+
+Do not return `null` or `undefined` to signal a typed failure — both are semantically ambiguous to
+the reader. Return a discriminated union so the caller has an unambiguous signal and TypeScript
+narrows the type automatically:
+
+```ts
+// ✗ — caller can't tell what null means without reading this function
+async function forceTimeout(): Promise<CallEntity | null>
+
+// ✓ — caller knows exactly what each branch means
+type ForceTimeoutResult = { ended: true; call: CallEntity } | { ended: false }
+async function forceTimeout(): Promise<ForceTimeoutResult>
+```
 
 ## Extensions
 
