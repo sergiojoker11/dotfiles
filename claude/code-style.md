@@ -11,6 +11,14 @@
 
 When a proposed change conflicts with existing code or introduces a naming collision, flag it explicitly and present the options — do not silently pick one side.
 
+## Consistency over style guide
+
+File-level consistency takes precedence over style guide rules. If a file follows a consistent pattern — even one that differs from the style guide — new code in that file must follow the same pattern. Introducing a style-guide-compliant inconsistency is worse than continuing an established pattern.
+
+If the file itself is already inconsistent, evaluate case by case whether to align with the majority pattern or flag it for a dedicated cleanup. Never mix styles within a single change.
+
+In any controversial case — where following the style guide would introduce inconsistency, or where two valid conventions conflict — always surface the trade-off explicitly and let the user decide. Do not silently pick one side.
+
 ## Languages
 
 - TypeScript: @typescript-style.md
