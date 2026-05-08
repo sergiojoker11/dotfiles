@@ -29,6 +29,17 @@ Follow the interactive guide:
 3. Select the AWS account and role
 4. The profile is saved to `~/.aws/config`
 
+### Changing the account of an existing profile
+
+Re-run the same command with the existing profile name. Press Enter at the
+"SSO session name" prompt to reuse the current session — the interactive
+account/role selector then lists every account accessible to you, so you can
+pick a different one without editing `~/.aws/config` by hand.
+
+```bash
+aws configure sso --profile <existing-profile-name>
+```
+
 ---
 
 ## Switching profiles
@@ -53,3 +64,14 @@ ekslogin [profile]
 Custom shell function (defined in `ansible/zsh/functions.zsh`).
 Lists all EKS clusters across all regions interactively.
 If no profile is passed, uses `$AWS_PROFILE` from the current shell.
+
+---
+
+## Aircall-specific notes
+
+### SSO region must be `us-east-1`
+
+When `aws configure sso` prompts for the SSO region, use `us-east-1`. This is
+the region where Aircall's IAM Identity Center lives, not the region where
+the services run (`us-west-2` for PDX). Picking any other region makes the
+account listing step fail.
