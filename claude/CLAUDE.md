@@ -2,3 +2,4 @@
 @claude-md-conventions.md
 @workflow.md
 @git.md
+@tickets.md

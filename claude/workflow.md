@@ -28,3 +28,7 @@ If a task is clearly repeatable and no tool is set up, say so and suggest the ri
 When the user asks for "evidence" — or to back up, prove, or confirm a claim — a summarized analysis or my own conclusion is **not sufficient**. Provide a **link to an authoritative source the user can open and verify with their own eyes**: a Datadog query/dashboard/logs/traces URL, a metric explorer link, a GitLab MR/commit/pipeline link, a query result, etc.
 
 Data crunching and explanation are a **complement, not a substitute** — it's fine (and useful) to explain and do the analysis, but the case is **not closed or proven until the verifiable link is provided**. Default to handing over the link, not just the number.
+
+### Always use absolute time ranges in observability links
+
+When sharing a Datadog (or any observability/monitoring) link, always pin it to an **absolute time range** — explicit `from`/`to` timestamps bracketing the relevant window — never a relative range like "last 4 hours" / "past 1h". A relative range drifts: once that much time has elapsed, the link no longer shows the window the evidence is about. The link must keep pointing at the same data whenever it is opened.
