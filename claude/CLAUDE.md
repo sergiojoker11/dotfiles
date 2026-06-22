@@ -3,4 +3,5 @@
 @workflow.md
 @observability.md
 @git.md
+@merge-request-review.md
 @tickets.md
