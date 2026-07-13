@@ -42,6 +42,25 @@ aws configure sso --profile <existing-profile-name>
 
 ---
 
+## Repopulating all profiles
+
+When you are granted access to a new role (or any time you want to sync your
+local config with every account and role accessible to you), run:
+
+```bash
+granted sso populate --sso-region us-east-1 https://d-90670a54ea.awsapps.com/start/
+```
+
+This replaces the interactive `aws configure sso` flow: it authenticates once
+and then writes a profile to `~/.aws/config` for every account/role combination
+you have access to, without prompting for each one.
+
+> [!NOTE]  
+> Use this after being given access to a new role — it is faster than
+> `aws configure sso --profile <name>` when the full config needs to be in sync.
+
+---
+
 ## Switching profiles
 
 Use `assume` (provided by [granted](https://github.com/fwdcloudsec/granted))
