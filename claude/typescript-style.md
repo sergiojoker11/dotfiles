@@ -45,6 +45,35 @@ return Attributes ? this.mapRecord(Attributes) : { ended: false }
 
 `!value` (boolean negation) is fine. `SomeType!` (type assertion) is not.
 
+### Fix the type, don't suppress it
+
+Neither `as SomeType` nor `@ts-expect-error` is an acceptable way to get past a type error. The first
+lies about what a value is; the second silences the compiler without changing anything. Both leave the
+model wrong and hide the next regression.
+
+When a type gets in the way — especially in tests — **the thing that is mis-modelled is usually the
+type, not the value**. Widen or split it so the real case is expressible:
+
+```ts
+// ✗ — asserts the object IS a valid body, when the whole point is that it is not
+const request = givenARequest({ body: { ...givenABody(), unexpected: 'x' } as RequestBody })
+
+// ✗ — same problem, now silenced instead of stated
+const request = givenARequest({
+  // @ts-expect-error Testing an invalid body
+  body: { ...givenABody(), unexpected: 'x' },
+})
+
+// ✓ — a request fixture used by validation tests must be able to build invalid bodies
+function givenARequest(properties?: Partial<Omit<Request, 'body'>> & { body?: unknown }): Request
+
+const request = givenARequest({ body: { ...givenABody(), unexpected: 'x' } })
+```
+
+Watch for the knock-on effect: widening a type often orphans existing `@ts-expect-error` directives,
+which then fail the build with `TS2578`. That is the type system telling you those suppressions were
+never needed.
+
 ### Error handling without throw
 
 Do not `throw` in domain logic. Return an explicit result type:
