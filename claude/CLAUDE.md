@@ -1,4 +1,5 @@
 @code-style.md
+@testing.md
 @claude-md-conventions.md
 @workflow.md
 @observability.md
