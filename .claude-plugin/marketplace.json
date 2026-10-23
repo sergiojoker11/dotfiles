@@ -20,6 +20,14 @@
       "category": "development",
       "version": "1.0.0",
       "author": { "name": "sj11" }
+    },
+    {
+      "name": "triage",
+      "description": "Ticket triage — ownership verdicts, handoffs and impact assessments backed by evidence",
+      "source": "./plugins/triage",
+      "category": "development",
+      "version": "1.0.0",
+      "author": { "name": "sj11" }
     }
   ]
 }

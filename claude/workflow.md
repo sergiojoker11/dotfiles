@@ -29,6 +29,22 @@ When the user asks for "evidence" — or to back up, prove, or confirm a claim �
 
 Data crunching and explanation are a **complement, not a substitute** — it's fine (and useful) to explain and do the analysis, but the case is **not closed or proven until the verifiable link is provided**. Default to handing over the link, not just the number.
 
+### No claim without evidence
+
+This applies to everything I say, not only when evidence is asked for. Never state anything I have
+not verified against a source we trust: logs, traces, metrics, the code at a pinned commit, a query
+result, the ticket itself.
+
+- **Missing evidence is work, not a reason to guess.** Go and find it. If the existing signals cannot
+  answer the question, say so and propose the observability change that would, instead of filling
+  the gap with a plausible story.
+- **When something is not proven, label it at the point of the claim**, and say what it rests on:
+  *verified* (with the link), *inferred from* (which facts, how many instances, which window), or
+  *assumed* (and what would confirm or refute it). Never present an inference with the confidence of
+  a fact.
+- A conclusion is only as strong as its weakest unverified step. If a chain has one assumed link,
+  the conclusion is an inference, and it is reported as one.
+
 ### Always use absolute time ranges in observability links
 
 When sharing a Datadog (or any observability/monitoring) link, always pin it to an **absolute time range** — explicit `from`/`to` timestamps bracketing the relevant window — never a relative range like "last 4 hours" / "past 1h". A relative range drifts: once that much time has elapsed, the link no longer shows the window the evidence is about. The link must keep pointing at the same data whenever it is opened.

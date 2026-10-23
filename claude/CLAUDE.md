@@ -6,3 +6,4 @@
 @git.md
 @merge-request-review.md
 @tickets.md
+@diagrams.md

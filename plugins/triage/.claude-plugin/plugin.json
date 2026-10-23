@@ -1,0 +1,6 @@
+{
+  "name": "triage",
+  "version": "1.0.0",
+  "description": "Ticket triage — ownership verdicts, handoffs and impact assessments backed by evidence",
+  "author": { "name": "sj11" }
+}
