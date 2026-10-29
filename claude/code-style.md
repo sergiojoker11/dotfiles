@@ -6,6 +6,7 @@
 - Validators are pure: they only return errors, never log or mutate state.
 - Avoid comments in code. A comment is usually a sign that the code can be made clearer through better naming or extraction into a well-named function. Replace comments with encapsulation.
   The only acceptable exceptions are code whose complexity is inherent and cannot be reduced — e.g. a performance-critical hot path or a non-trivial mathematical formula. In all other cases, prefer readable code over explained code.
+- Never reference merge requests, pull requests or tickets in code comments. The git history already links code to the change that introduced it.
 
 ## Conflicts and trade-offs
 
