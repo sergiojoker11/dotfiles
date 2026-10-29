@@ -1,0 +1,33 @@
+- name: Ensure ~/.config/opencode directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/opencode"
+    state: directory
+    mode: "0755"
+
+- name: Ensure ~/.config/opencode/opencode.jsonc exists
+  ansible.builtin.copy:
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/opencode/opencode.jsonc"
+    content: "{}\n"
+    force: false
+    mode: "0644"
+
+- name: Load OpenCode config fragment
+  ansible.builtin.include_vars:
+    file: "{{ playbook_dir }}/opencode/config-fragment.yml"
+
+- name: Merge OpenCode config
+  vars:
+    config: "{{ ansible_facts['env']['HOME'] }}/.config/opencode/opencode.jsonc"
+  ansible.builtin.shell: |
+    merged=$(jq -s '.[0] * .[1]' "{{ config }}" -)
+    current=$(jq '.' "{{ config }}")
+    if [ "$merged" = "$current" ]; then
+      echo "unchanged"
+    else
+      echo "$merged" > "{{ config }}"
+      echo "changed"
+    fi
+  args:
+    stdin: "{{ opencode_config_fragment | to_json }}"
+  register: opencode_config_result
+  changed_when: opencode_config_result.stdout == 'changed'

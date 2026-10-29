@@ -1,0 +1,45 @@
+opencode_config_fragment:
+  $schema: "https://opencode.ai/config.json"
+  instructions:
+    - "{{ dotfiles_dir }}/claude/*.md"
+  skills:
+    - "{{ dotfiles_dir }}/plugins/triage/skills"
+    - "{{ dotfiles_dir }}/plugins/lens/skills"
+    - "{{ dotfiles_dir }}/plugins/git/skills"
+  permission:
+    edit: allow
+    webfetch: allow
+    bash:
+      "*": ask
+      "ls*": allow
+      "cat *": allow
+      "head *": allow
+      "tail *": allow
+      "wc *": allow
+      "grep *": allow
+      "rg *": allow
+      "find *": allow
+      "jq *": allow
+      "git status*": allow
+      "git diff*": allow
+      "git log*": allow
+      "git show*": allow
+      "git branch*": allow
+      "git fetch*": allow
+      "git ls-remote*": allow
+      "git -C * status*": allow
+      "git -C * diff*": allow
+      "git -C * log*": allow
+      "yarn test*": allow
+      "yarn lint*": allow
+      "yarn build*": allow
+      "yarn info*": allow
+      "yarn workspace*": allow
+      "npx jest*": allow
+      "npx tsc*": allow
+      "npm view*": allow
+      "brew list*": allow
+      "git push*": ask
+      "git commit*": ask
+      "git reset*": ask
+      "git rebase*": ask

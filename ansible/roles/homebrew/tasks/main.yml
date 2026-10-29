@@ -1,3 +1,9 @@
+- name: Tap third-party Homebrew repositories
+  community.general.homebrew_tap:
+    name:
+      - anomalyco/tap
+    state: present
+
 - name: Install brew formulae
   community.general.homebrew:
     name:
@@ -31,6 +37,7 @@
       # dev tools
       - glab
       - gh
+      - anomalyco/tap/opencode-v2
     state: present
     update_homebrew: false
 

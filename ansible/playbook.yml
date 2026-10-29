@@ -11,6 +11,7 @@
     - gh
     - gnupg
     - claude
+    - opencode
 
   post_tasks:
     - name: Manual steps reminder
@@ -22,3 +23,4 @@
           - "3. glab auth login --hostname gitlab.com  (select SSH + auth via Web)"
           - "4. gh auth login"
           - "5. In Claude Code: /mcp → select each server → OAuth in browser"
+          - "6. OpenCode: add work MCP servers locally, then opencode mcp auth <name>"
