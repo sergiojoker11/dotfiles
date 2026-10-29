@@ -39,3 +39,8 @@ back in sync — don't let it go stale.
 
 Trivial changes (lint fixes, test tweaks, comment wording, a flaky-test retry) don't warrant a
 description update. This is about problem/solution drift, not every commit.
+
+## Never comment on MRs
+
+Never post comments, replies or thread resolutions on a merge request, even when asked to address review
+comments. Make the code changes and draft any reply text in chat for me to post myself.

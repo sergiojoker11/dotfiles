@@ -23,3 +23,36 @@ In any controversial case — where following the style guide would introduce in
 ## Languages
 
 - TypeScript: @typescript-style.md
+
+## Reuse a shared type before inventing one
+
+Before adding a type to a shared contract (an exception, an error code, a union member), check whether an
+existing standard type already carries that meaning, and reuse it even when the ticket asks for a new
+one. The question is not "are these two cases different?" but "does the client have to act differently,
+and is there already a type that says so?". A duplicate costs a union member every client must learn and
+a registry code, and buys nothing. Propose the smaller surface and flag that the ticket needs amending.
+
+## Variants are data
+
+When behaviour varies by environment, provider or tenant, write one generic function that takes the
+varying values as parameters, one thin wrapper per variant that supplies only those values, and a
+dispatcher on top. Never write a single function with a `case` that assigns every variant's values inline
+and then falls through to shared logic. This applies to shell, TypeScript and config builders alike;
+propose the split by default.
+
+## Derived constants are relative to their base
+
+Write `BASE_TIMEOUT + 5`, not `65`. The literal silently diverges when the base changes. If the syntax
+forbids cross-references (enum members, for example), extract an intermediate constant that both use.
+
+## Annotations sit next to what they describe
+
+A log field or metadata that describes a specific value sits right next to that literal and reads it from
+the same object (`assignedStatus: agent.status` right after the line that sets it), so changing the
+literal cannot leave a stale annotation behind.
+
+## Do not restyle code outside the change
+
+Do not convert existing code to match a style preference (enums to `as const`, classes to functions) when
+that code is not the target of the change. New code follows the style guide; untouched code stays as it
+is. If a preference would require touching out-of-scope code, flag it and present the options.

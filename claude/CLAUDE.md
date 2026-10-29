@@ -7,3 +7,4 @@
 @merge-request-review.md
 @tickets.md
 @diagrams.md
+@language.md

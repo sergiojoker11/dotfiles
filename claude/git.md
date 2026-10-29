@@ -31,3 +31,21 @@ ref then silently undoes their rebase.
 
 Before any history rewrite on a shared branch, compare the local base with `origin/<base>` and the
 local branch with its remote counterpart, and say what each one is.
+
+## Commits and pushes are mine
+
+Do not commit or push unless I ask. After making changes, show what changed and stop.
+
+- **Approval covers one change, not the next round.** A go-ahead for "branch, commit and MR" authorises
+  that commit. Every later amend or force-push on the same branch needs its own go-ahead; default to
+  showing `git diff` and stopping.
+- **An explicit "create the MR" on uncommitted work covers the commit and push it needs.** Do it; do not
+  hand the git commands back to me.
+- Before force-pushing onto a branch I am managing myself (for example, rebasing), confirm first.
+
+## Optional changes go in their own commit
+
+When a change carries a fix plus something the fix does not need (a log, metadata, a cleanup), make two
+commits: `fix:` for the fix and `chore:` for the extra, and say so in the MR description. MRs are
+squashed, but the split lets reviewers drop the extra. Re-read my earlier messages for commit-structure
+requests before committing.

@@ -26,3 +26,26 @@ Failure mode seen in practice: `[\`@some.field\` returns 0 results](url)` and a 
 `[\`abc1234\`](url)` both publish as plain text with the link gone, and nothing in the API response
 signals it. After any markdown write to Jira or Confluence, **re-fetch the content and confirm the
 links are still there** — that is the only reliable check.
+
+## Drafts sound like a colleague wrote them
+
+Jira comments and Slack replies that I will post under my name use short plain paragraphs, first person
+and a casual tone, with a simple list at most. No bold headings and no "Root cause / Fixes / Scope"
+scaffolding. Keep only the facts the reader needs, plus the links.
+
+## Proposals present options, not a recommendation
+
+A proposal, RFC or decision document presents the options neutrally (effort, risk and reach for each),
+plus open investigations and questions. Leave out any Recommendation section, any "what I would do
+first", and any ordering of options that implies a choice: I add my own opinion. If I ask for an
+opinion in chat, give it in chat and keep it out of the document.
+
+## Design doc structure
+
+1. Separate "how it works today" from "what we propose" into distinct sections, never interleaved. A
+   reader who cannot tell fact from proposal cannot review the proposal.
+2. Open with an overview of both.
+3. Write two documents split by depth (an executive one and an implementation one), not by audience, and
+   cross-link them.
+4. Use many diagrams at increasing depth: first the parts and the information flow, then protocols and
+   calls, then frequency and timing. Writing the timing level forces analysis that prose lets you skip.
