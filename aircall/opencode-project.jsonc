@@ -1,0 +1,11 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "/Users/sj11/Documents/gitrepos/sj11/dotfiles/claude/*.md",
+    "/Users/sj11/Documents/gitrepos/aircall/CLAUDE.md",
+    "/Users/sj11/.claude/projects/-Users-sj11-Documents-gitrepos-aircall/memory/MEMORY.md"
+  ],
+  "skills": [
+    "/Users/sj11/.claude/local-plugins/calls-routing-toolkit/skills"
+  ]
+}
